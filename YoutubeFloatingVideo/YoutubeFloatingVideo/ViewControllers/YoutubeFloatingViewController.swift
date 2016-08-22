@@ -10,11 +10,27 @@ import UIKit
 
 class YoutubeFloatingViewController: UIViewController {
 
+    @IBOutlet weak var videoCollectionView: UICollectionView!
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var dismissButton: UIButton!
+
+    @IBOutlet weak var youtubeCollectionViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topPlayerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightPlayerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftPlayerViewConstraint: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        videoCollectionView.delegate = self
+        videoCollectionView.dataSource = self
+//        videoCollectionView.layoutIfNeeded()
 
         title = "Videos"
         // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,15 +41,24 @@ class YoutubeFloatingViewController: UIViewController {
     @IBAction func dismissAction(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension YoutubeFloatingViewController: UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
     }
-    */
 
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath)
+    }
+
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+}
+
+extension YoutubeFloatingViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 150)
+    }
 }

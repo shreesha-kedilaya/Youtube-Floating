@@ -23,6 +23,9 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func loginButtonDidTap(sender: AnyObject) {
+        let youtubeVC = storyboard?.instantiateViewControllerWithIdentifier("VideoCollectionViewController") as? VideoCollectionViewController
+        navigationController?.pushViewController(youtubeVC!, animated: true)
+    }
 }
 

@@ -13,6 +13,7 @@
 		110133BF1D65953A0012E47A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110133BE1D65953A0012E47A /* Assets.xcassets */; };
 		110133C21D65953A0012E47A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 110133C01D65953A0012E47A /* LaunchScreen.storyboard */; };
 		110133CC1D6595950012E47A /* YoutubeFloatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110133CB1D6595950012E47A /* YoutubeFloatingViewController.swift */; };
+		113BF82E1D6723B300F0475B /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BF82D1D6723B300F0475B /* VideoCollectionViewController.swift */; };
 		116279D21D66CEA2003F2AC3 /* FloatingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116279D11D66CEA2003F2AC3 /* FloatingAnimator.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		110133C11D65953A0012E47A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		110133C31D65953A0012E47A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110133CB1D6595950012E47A /* YoutubeFloatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeFloatingViewController.swift; sourceTree = "<group>"; };
+		113BF82D1D6723B300F0475B /* VideoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewController.swift; sourceTree = "<group>"; };
 		116279D11D66CEA2003F2AC3 /* FloatingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 			children = (
 				110133B91D65953A0012E47A /* LoginViewController.swift */,
 				110133CB1D6595950012E47A /* YoutubeFloatingViewController.swift */,
+				113BF82D1D6723B300F0475B /* VideoCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				110133CC1D6595950012E47A /* YoutubeFloatingViewController.swift in Sources */,
 				110133BA1D65953A0012E47A /* LoginViewController.swift in Sources */,
 				110133B81D65953A0012E47A /* AppDelegate.swift in Sources */,
+				113BF82E1D6723B300F0475B /* VideoCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
