@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xHn-p7-0Ne">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="kWZ-cb-GtH">
+            <objects>
+                <navigationController id="xHn-p7-0Ne" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZO9-cU-5mQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EeD-de-rU2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKb-Iw-nky" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="-267"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="YoutubeFloatingContainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuG-4A-lAj">
+                                <rect key="frame" x="225" y="275" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.52156862749999999" green="0.74901960779999999" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="DR2-yx-pVO"/>
+                                    <constraint firstAttribute="width" constant="150" id="s2x-me-6ON"/>
+                                </constraints>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.95257069750000001" green="0.96770874200000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aR4-Yu-wPu" kind="show" id="g13-6T-WhO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.15732315790000001" green="0.3499669856" blue="0.61442550510000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wuG-4A-lAj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rte-tH-aMg"/>
+                            <constraint firstItem="wuG-4A-lAj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wrN-9k-mTt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="YGB-ds-fUb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="222" y="404"/>
+        </scene>
+        <!--Video Collection Controller-->
+        <scene sceneID="FGT-WM-jw1">
+            <objects>
+                <viewController storyboardIdentifier="VideoCollectionController" automaticallyAdjustsScrollViewInsets="NO" id="aR4-Yu-wPu" customClass="VideoCollectionController" customModule="YoutubeFloatingContainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RqZ-c6-tsb"/>
+                        <viewControllerLayoutGuide type="bottom" id="UCt-jj-o1i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QDy-eY-vdn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-FC-VEw">
+                                <rect key="frame" x="0.0" y="20" width="375" height="462"/>
+                                <color key="backgroundColor" red="0.16706586979999999" green="0.33289747009999998" blue="0.63370028410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zS4-gE-RFa">
+                                    <size key="itemSize" width="375" height="145"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SomeOtherCell" id="M1Z-Qi-mfH">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.1786329646" green="0.39790691350000001" blue="0.70344065659999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5v5-9X-kMg">
+                                <rect key="frame" x="135" y="531" width="230" height="128"/>
+                                <connections>
+                                    <segue destination="0el-2w-0wZ" kind="embed" id="CdE-yf-dqR"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E1u-FC-VEw" firstAttribute="leading" secondItem="QDy-eY-vdn" secondAttribute="leading" id="9y0-98-ToU"/>
+                            <constraint firstItem="UCt-jj-o1i" firstAttribute="top" secondItem="E1u-FC-VEw" secondAttribute="bottom" id="b3g-fc-cs9"/>
+                            <constraint firstItem="E1u-FC-VEw" firstAttribute="top" secondItem="RqZ-c6-tsb" secondAttribute="bottom" id="g5E-4f-dJR"/>
+                            <constraint firstAttribute="trailing" secondItem="E1u-FC-VEw" secondAttribute="trailing" id="rlo-6a-5gJ"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZlV-3o-uvT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="809.5" y="437.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Fs4-xI-GHr">
+            <objects>
+                <viewController id="0el-2w-0wZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cUX-rT-voJ">
+                        <rect key="frame" x="0.0" y="0.0" width="230" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6a-8F-mdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

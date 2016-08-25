@@ -14,6 +14,7 @@ class YoutubeFloatingViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var dismissButton: UIButton!
 
+    @IBOutlet weak var embeddedView: UIView!
     @IBOutlet weak var youtubeCollectionViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var topPlayerConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightPlayerConstraint: NSLayoutConstraint!
@@ -23,6 +24,7 @@ class YoutubeFloatingViewController: UIViewController {
         super.viewDidLoad()
         videoCollectionView.delegate = self
         videoCollectionView.dataSource = self
+        playerView.backgroundColor = UIColor.redColor()
 //        videoCollectionView.layoutIfNeeded()
 
         title = "Videos"
@@ -39,7 +41,9 @@ class YoutubeFloatingViewController: UIViewController {
     }
     
     @IBAction func dismissAction(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true) { 
+            
+        }
     }
 }
 

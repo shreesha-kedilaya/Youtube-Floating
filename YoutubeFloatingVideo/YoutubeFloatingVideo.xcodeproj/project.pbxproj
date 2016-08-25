@@ -14,6 +14,12 @@
 		110133C21D65953A0012E47A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 110133C01D65953A0012E47A /* LaunchScreen.storyboard */; };
 		110133CC1D6595950012E47A /* YoutubeFloatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110133CB1D6595950012E47A /* YoutubeFloatingViewController.swift */; };
 		113BF82E1D6723B300F0475B /* VideoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BF82D1D6723B300F0475B /* VideoCollectionViewController.swift */; };
+		113BF8361D6DD34100F0475B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BF8351D6DD34100F0475B /* AppDelegate.swift */; };
+		113BF8381D6DD34100F0475B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BF8371D6DD34100F0475B /* LoginViewController.swift */; };
+		113BF83B1D6DD34100F0475B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113BF8391D6DD34100F0475B /* Main.storyboard */; };
+		113BF83D1D6DD34100F0475B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 113BF83C1D6DD34100F0475B /* Assets.xcassets */; };
+		113BF8401D6DD34100F0475B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113BF83E1D6DD34100F0475B /* LaunchScreen.storyboard */; };
+		113BF8461D6EB96100F0475B /* VideoCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BF8451D6EB96100F0475B /* VideoCollectionController.swift */; };
 		116279D21D66CEA2003F2AC3 /* FloatingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116279D11D66CEA2003F2AC3 /* FloatingAnimator.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,11 +33,26 @@
 		110133C31D65953A0012E47A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110133CB1D6595950012E47A /* YoutubeFloatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeFloatingViewController.swift; sourceTree = "<group>"; };
 		113BF82D1D6723B300F0475B /* VideoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewController.swift; sourceTree = "<group>"; };
+		113BF8331D6DD34100F0475B /* YoutubeFloatingContainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeFloatingContainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		113BF8351D6DD34100F0475B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		113BF8371D6DD34100F0475B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		113BF83A1D6DD34100F0475B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		113BF83C1D6DD34100F0475B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		113BF83F1D6DD34100F0475B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		113BF8411D6DD34100F0475B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		113BF8451D6EB96100F0475B /* VideoCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionController.swift; sourceTree = "<group>"; };
 		116279D11D66CEA2003F2AC3 /* FloatingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		110133B11D65953A0012E47A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		113BF8301D6DD34100F0475B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				110133B61D65953A0012E47A /* YoutubeFloatingVideo */,
+				113BF8341D6DD34100F0475B /* YoutubeFloatingContainer */,
 				110133B51D65953A0012E47A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				110133B41D65953A0012E47A /* YoutubeFloatingVideo.app */,
+				113BF8331D6DD34100F0475B /* YoutubeFloatingContainer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +112,20 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		113BF8341D6DD34100F0475B /* YoutubeFloatingContainer */ = {
+			isa = PBXGroup;
+			children = (
+				113BF8351D6DD34100F0475B /* AppDelegate.swift */,
+				113BF8371D6DD34100F0475B /* LoginViewController.swift */,
+				113BF8451D6EB96100F0475B /* VideoCollectionController.swift */,
+				113BF8391D6DD34100F0475B /* Main.storyboard */,
+				113BF83C1D6DD34100F0475B /* Assets.xcassets */,
+				113BF83E1D6DD34100F0475B /* LaunchScreen.storyboard */,
+				113BF8411D6DD34100F0475B /* Info.plist */,
+			);
+			path = YoutubeFloatingContainer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +146,23 @@
 			productReference = 110133B41D65953A0012E47A /* YoutubeFloatingVideo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		113BF8321D6DD34100F0475B /* YoutubeFloatingContainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 113BF8441D6DD34100F0475B /* Build configuration list for PBXNativeTarget "YoutubeFloatingContainer" */;
+			buildPhases = (
+				113BF82F1D6DD34100F0475B /* Sources */,
+				113BF8301D6DD34100F0475B /* Frameworks */,
+				113BF8311D6DD34100F0475B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YoutubeFloatingContainer;
+			productName = YoutubeFloatingContainer;
+			productReference = 113BF8331D6DD34100F0475B /* YoutubeFloatingContainer.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -120,6 +174,9 @@
 				ORGANIZATIONNAME = YML;
 				TargetAttributes = {
 					110133B31D65953A0012E47A = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					113BF8321D6DD34100F0475B = {
 						CreatedOnToolsVersion = 7.3;
 					};
 				};
@@ -138,6 +195,7 @@
 			projectRoot = "";
 			targets = (
 				110133B31D65953A0012E47A /* YoutubeFloatingVideo */,
+				113BF8321D6DD34100F0475B /* YoutubeFloatingContainer */,
 			);
 		};
 /* End PBXProject section */
@@ -150,6 +208,16 @@
 				110133C21D65953A0012E47A /* LaunchScreen.storyboard in Resources */,
 				110133BF1D65953A0012E47A /* Assets.xcassets in Resources */,
 				110133BD1D65953A0012E47A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		113BF8311D6DD34100F0475B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				113BF8401D6DD34100F0475B /* LaunchScreen.storyboard in Resources */,
+				113BF83D1D6DD34100F0475B /* Assets.xcassets in Resources */,
+				113BF83B1D6DD34100F0475B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +236,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		113BF82F1D6DD34100F0475B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				113BF8461D6EB96100F0475B /* VideoCollectionController.swift in Sources */,
+				113BF8381D6DD34100F0475B /* LoginViewController.swift in Sources */,
+				113BF8361D6DD34100F0475B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -183,6 +261,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				110133C11D65953A0012E47A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		113BF8391D6DD34100F0475B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				113BF83A1D6DD34100F0475B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		113BF83E1D6DD34100F0475B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				113BF83F1D6DD34100F0475B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -297,6 +391,28 @@
 			};
 			name = Release;
 		};
+		113BF8421D6DD34100F0475B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YoutubeFloatingContainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YML0158.YoutubeFloatingContainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		113BF8431D6DD34100F0475B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = YoutubeFloatingContainer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = YML0158.YoutubeFloatingContainer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -317,6 +433,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		113BF8441D6DD34100F0475B /* Build configuration list for PBXNativeTarget "YoutubeFloatingContainer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				113BF8421D6DD34100F0475B /* Debug */,
+				113BF8431D6DD34100F0475B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

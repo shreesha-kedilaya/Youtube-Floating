@@ -18,12 +18,19 @@ enum TransitionAnimationHandlerType {
     case Start
     case Progress(percentComplete: CGFloat)
     case Cancel(percentComplete: CGFloat)
-    case Complete
+    case Complete(completed: Bool)
+}
+
+protocol FloatingAnimatorDelegate: class {
+    func floatingAnimatorPresentingAnimation(floatingAnimator: FloatingAnimator, ofType type: TransitionAnimationHandlerType, transitionContext: UIViewControllerContextTransitioning)
+    func floatingAnimatorDismissAnimation(floatingAnimator: FloatingAnimator, ofType type: TransitionAnimationHandlerType, transitionContext: UIViewControllerContextTransitioning)
 }
 
 class FloatingAnimator: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning{
 
-    private(set) var transitionType = TransitionType.Present(interactive: false)
+    var transitionType = TransitionType.Present(interactive: false)
+
+    var interacitve = false
 
     private var parentViewController: UIViewController?
 
@@ -33,9 +40,16 @@ class FloatingAnimator: UIPercentDrivenInteractiveTransition, UIViewControllerAn
 
     private var transitionContext: UIViewControllerContextTransitioning?
 
+    weak var delegate: FloatingAnimatorDelegate?
+
     var durationAnimation: NSTimeInterval = NSTimeInterval(0.5)
 
-    var targetView: UIView?
+    var targetView: UIView? {
+        didSet{
+            removeGesture()
+            registerPangesture()
+        }
+    }
 
     //Handlers
 
@@ -43,8 +57,11 @@ class FloatingAnimator: UIPercentDrivenInteractiveTransition, UIViewControllerAn
     var dismissalHandler: ((transitionContext: UIViewControllerContextTransitioning?, animationType: TransitionAnimationHandlerType)->())?
 
     init(parentViewController: UIViewController, childViewController: UIViewController) {
+
         self.parentViewController = parentViewController
         self.childViewController = childViewController
+        super.init()
+        registerPangesture()
     }
 
     private func registerPangesture() {
@@ -95,75 +112,53 @@ extension FloatingAnimator {
         let containerView = transitionContext.containerView()
         self.transitionContext = transitionContext
 
-        doAnimations(transitionDuration(transitionContext), containerView: containerView) {
+        callEventHandlers(.Start, transitionContext: transitionContext)
+
+        doAnimations(transitionContext, duration: transitionDuration(transitionContext), containerView: containerView, cancel: transitionContext.transitionWasCancelled()) {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
         }
+    }
 
+    func animationEnded(transitionCompleted: Bool) {
+        interacitve = false
     }
 
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return durationAnimation
     }
-    private func doAnimations(duration: NSTimeInterval, containerView: UIView?, completion: ()->()) {
 
-        callEventHandlers(.Start)
-        UIView.animateWithDuration(duration, animations: {
-            self.callEventHandlers(.Progress(percentComplete: 1.0))
+    private func doAnimations(transitionContext: UIViewControllerContextTransitioning, duration: NSTimeInterval, percent: CGFloat = 1, containerView: UIView?, cancel: Bool = false, completion: ()->()) {
+        
+        UIView.animateWithDuration(0.5, animations: {
+            if cancel {
+                self.callEventHandlers(.Cancel(percentComplete: percent), transitionContext: transitionContext)
+            } else {
+                self.callEventHandlers(.Progress(percentComplete: 1.0), transitionContext: transitionContext)
+            }
             }) { (complete) in
+                self.callEventHandlers(.Complete(completed: !cancel), transitionContext: transitionContext)
                 completion()
-                self.callEventHandlers(.Complete)
         }
     }
 
-    private func callEventHandlers(type: TransitionAnimationHandlerType){
+    private func callEventHandlers(type: TransitionAnimationHandlerType, transitionContext: UIViewControllerContextTransitioning){
 
         switch transitionType {
 
-        case .Present(_:_): callPresentationHandler(type)
+        case .Present(_:_): callPresentationHandler(type, transitionContext: transitionContext)
 
-        case .Dismiss(_:_): callDismissHandler(type)
-
-        }
-    }
-
-    private func callPresentationHandler(type: TransitionAnimationHandlerType) {
-        switch type {
-
-        case .Start:                                    presentationHandler?(transitionContext: self.transitionContext, animationType: .Start)
-
-        case let .Progress( percentComplete ):          presentationHandler?(transitionContext: self.transitionContext, animationType: .Progress(percentComplete: percentComplete))
-
-        case let .Cancel( percentComplete ):            presentationHandler?(transitionContext: self.transitionContext, animationType: .Cancel(percentComplete: percentComplete))
-
-        case .Complete:                                 presentationHandler?(transitionContext: self.transitionContext, animationType: .Complete)
+        case .Dismiss(_:_): callDismissHandler(type, transitionContext: transitionContext)
 
         }
     }
 
-    private func callDismissHandler(type: TransitionAnimationHandlerType) {
-        switch type {
-
-        case .Start:                                dismissalHandler?(transitionContext: self.transitionContext, animationType: .Start)
-
-        case let .Progress( percentComplete ):      dismissalHandler?(transitionContext: self.transitionContext, animationType: .Progress(percentComplete: percentComplete))
-
-        case let .Cancel( percentComplete ):        dismissalHandler?(transitionContext: self.transitionContext, animationType: .Cancel(percentComplete: percentComplete))
-
-        case .Complete:                             dismissalHandler?(transitionContext: self.transitionContext, animationType: .Complete)
-        }
+    private func callPresentationHandler(type: TransitionAnimationHandlerType, transitionContext: UIViewControllerContextTransitioning) {
+        delegate?.floatingAnimatorPresentingAnimation(self, ofType: type, transitionContext: transitionContext)
     }
 
-    //    override func animationDidStart(anim: CAAnimation) {
-    //
-    //    }
-    //
-    //    func animationEnded(transitionCompleted: Bool) {
-    //
-    //    }
-    //
-    //    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-    //
-    //    }
+    private func callDismissHandler(type: TransitionAnimationHandlerType, transitionContext: UIViewControllerContextTransitioning) {
+        delegate?.floatingAnimatorDismissAnimation(self, ofType: type, transitionContext: transitionContext)
+    }
 }
 
 extension FloatingAnimator {
@@ -205,54 +200,148 @@ extension FloatingAnimator {
 extension FloatingAnimator {
     func handelTransitionGesture(gesture: UIPanGestureRecognizer){
         let state = gesture.state
+        let fromView = transitionContext?.getView(.From)
+
+        let location = gesture.locationInView(gesture.view?.superview)
+//        location = CGPointApplyAffineTransform(location, CGAffineTransformInvert(gesture.view!.transform))
 
         switch state {
 
-        case .Began:()
-            //start interactive transition
+        case .Began:
+
+            interacitve = true
+            switch transitionType {
+            case .Present:
+                if let presentedViewController = childViewController {
+                    transitionType = .Present(interactive: true)
+                    parentViewController?.presentViewController(presentedViewController, animated: true, completion: nil)
+                }
+            case .Dismiss:
+                transitionType = .Dismiss(interactive: true)
+                childViewController?.dismissViewControllerAnimated(true, completion: nil)
+            }
+
         case .Changed:
-            ()
+
+            var viewController: UIViewController?
+
+            var bounds = CGRectZero
+
+            if let targetView = targetView {
+                bounds = targetView.bounds
+            }
+
+            var percent: CGFloat = 0.0
+
+            switch transitionType {
+            case .Present:
+                percent = 1 - location.y / CGRectGetHeight(bounds)
+            default:
+                percent = location.y / CGRectGetHeight(bounds)
+
+            }
+
+            updateInteractiveTransition(percent)
+
+            gesture.setTranslation(CGPointZero, inView: gesture.view?.superview)
+
+//            print("\n------------------ location y \(location.y) ----------------------\n")
+//            print("\n------------------ percent in gesture \(percent) ----------------------\n")
             //change interactive transition
         case .Ended:
-            ()
+
+            let velocity = gesture.velocityInView(gesture.view?.superview)
+
+            var bounds = CGRectZero
+
+            if let fromView = fromView {
+                bounds = fromView.bounds
+            }
+
+            let percent: CGFloat = 0.0
+
+            var condition = true
+
+            switch transitionType {
+            case .Present:
+                condition = location.y < (CGRectGetHeight(UIScreen.mainScreen().bounds) / 2)
+            default:
+                condition = location.y > (CGRectGetHeight(UIScreen.mainScreen().bounds) / 2)
+            }
+
+            if condition {
+                finishInteractiveTransition(percent, velocity: velocity)
+            } else {
+                cancelInteractiveTransition(percent)
+            }
+
             //complete interactive transition
         default:
-            ()
+            var bounds = CGRectZero
+
+            let velocity = gesture.velocityInView(gesture.view?.superview)
+
+            if let fromView = fromView {
+                bounds = fromView.bounds
+            }
+
+            let percent = location.y / CGRectGetHeight(bounds)
+            if location.y > (CGRectGetHeight(UIScreen.mainScreen().bounds) / 2) {
+                finishInteractiveTransition(percent, velocity: velocity)
+            } else {
+                cancelInteractiveTransition(percent)
+            }
             //cancel interactive transition
         }
     }
+
+    override func updateInteractiveTransition(percentComplete: CGFloat) {
+        super.updateInteractiveTransition(percentComplete)
+        if let transitionContext = transitionContext {
+            callEventHandlers(.Progress(percentComplete: percentComplete), transitionContext: transitionContext)
+        }
+    }
+
+    func cancelInteractiveTransition(percent: CGFloat) {
+        super.cancelInteractiveTransition()
+        if let transitionContext = transitionContext {
+            doAnimations(transitionContext, duration: transitionDuration(transitionContext),percent: percent, containerView: transitionContext.containerView(),cancel: true, completion: {
+
+                self.callEventHandlers(.Cancel(percentComplete: percent), transitionContext: transitionContext)
+//                transitionContext.completeTransition(false)
+            })
+        }
+//        print("cancelInteractiveTransition is called")
+    }
+
+    func finishInteractiveTransition(percent: CGFloat, velocity: CGPoint) {
+        super.finishInteractiveTransition()
+        if let transitionContext = transitionContext {
+            doAnimations(transitionContext, duration: transitionDuration(transitionContext), percent: 1, containerView: transitionContext.containerView(), completion: {
+                self.callEventHandlers(.Complete(completed: true), transitionContext: transitionContext)
+//                transitionContext.completeTransition(false)
+            })
+        }
+//        print("finishInteractiveTransition is called")
+    }
 }
+
 
 //MARK: UIViewControllerTransitioningDelegate
 
 extension FloatingAnimator: UIViewControllerTransitioningDelegate {
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitionType = .Present(interactive: false)
         return self
     }
-
     func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        var returnValue: UIViewControllerInteractiveTransitioning?
-        switch transitionType {
-        case let .Dismiss (interactive):
-            returnValue = interactive ? self : nil
-        default: ()
-        }
-        return returnValue
+        return self.interacitve ? self : nil
     }
 
     func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        var returnValue: UIViewControllerInteractiveTransitioning?
-        switch transitionType {
-        case let .Present (interactive):
-            returnValue = interactive ? self : nil
-        default: ()
-        }
-        return returnValue
+        return self.interacitve ? self : nil
     }
 
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transitionType = .Dismiss(interactive: true)
         return self
     }
 }
@@ -277,7 +366,7 @@ extension UIViewControllerContextTransitioning {
         }
     }
 
-    func getStartFrameFor(viewController : UIViewController?, type: FrameType) -> CGRect? {
+    func getFrameFor(viewController : UIViewController?, type: FrameType) -> CGRect? {
         if let viewController = viewController {
             switch type {
             case .Initial:
